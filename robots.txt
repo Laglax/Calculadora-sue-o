@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://laglax.github.io/Calculadora-sueno/sitemap.xml
+Sitemap: https://calculadora-sueno.netlify.app/sitemap.xml
