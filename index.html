@@ -40,7 +40,94 @@
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
+
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      border-top: 4px solid #ffa94d;
+    }
+
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ffa94d;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      font-size: 20px;
+      display: none;
+      z-index: 1000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #222;
+        color: #eee;
+      }
+      header {
+        background-color: #a259ff;
+      }
+      section#faq {
+        background: #333;
+        color: #eee;
+      }
+    }
   </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Por qué es importante calcular las horas de sueño?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Calcular las horas de sueño es fundamental para garantizar un descanso de calidad..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuántas horas debo dormir según mi edad?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La cantidad de horas de sueño recomendada varía según la edad..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es un ciclo de sueño y cómo afecta a mi descanso?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Un ciclo de sueño completo dura aproximadamente 90 minutos..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué me despierto cansado incluso después de dormir 8 horas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sentirte cansado después de dormir 8 horas puede deberse a varios factores..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo mejorar mi higiene del sueño para dormir mejor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mejorar la higiene del sueño implica adoptar hábitos saludables..."
+          }
+        }
+      ]
+    }
+  </script>
 </head>
 <body>
   <header id="pageHeader">
@@ -51,18 +138,63 @@
     <iframe id="calcFrame" src="main.html" title="Calculadora de Sueño"></iframe>
   </main>
 
+  <section id="faq" style="max-width: 800px; margin: 50px auto; padding: 20px; background: #f9f9f9; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.1); font-family: 'Inter', sans-serif;">
+    <h2 style="text-align: center; color: #333;">Preguntas Frecuentes</h2>
+    <details style="margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #fff;">
+      <summary style="cursor: pointer; font-weight: bold;">¿Por qué es importante calcular las horas de sueño?</summary>
+      <p style="margin-top: 10px;">Calcular las horas de sueño es fundamental para garantizar un descanso de calidad que permita al cuerpo y la mente recuperarse adecuadamente...</p>
+    </details>
+    <details style="margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #fff;">
+      <summary style="cursor: pointer; font-weight: bold;">¿Cuántas horas debo dormir según mi edad?</summary>
+      <p style="margin-top: 10px;">La cantidad de horas de sueño recomendada varía según la edad...</p>
+    </details>
+    <details style="margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #fff;">
+      <summary style="cursor: pointer; font-weight: bold;">¿Qué es un ciclo de sueño y cómo afecta a mi descanso?</summary>
+      <p style="margin-top: 10px;">Un ciclo de sueño completo dura aproximadamente 90 minutos...</p>
+    </details>
+    <details style="margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #fff;">
+      <summary style="cursor: pointer; font-weight: bold;">¿Por qué me despierto cansado incluso después de dormir 8 horas?</summary>
+      <p style="margin-top: 10px;">Sentirte cansado después de dormir 8 horas puede deberse a varios factores...</p>
+    </details>
+    <details style="margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #fff;">
+      <summary style="cursor: pointer; font-weight: bold;">¿Cómo mejorar mi higiene del sueño para dormir mejor?</summary>
+      <p style="margin-top: 10px;">Mejorar la higiene del sueño implica adoptar hábitos saludables...</p>
+    </details>
+  </section>
+
+  <button id="scrollTopBtn" onclick="scrollToTop()">↑</button>
+
+  <footer>
+    <p>&copy; 2025 REMinder. Todos los derechos reservados. | <a href="#" style="color: #ffa94d; text-decoration: underline;">Política de Privacidad</a> | <a href="#" style="color: #ffa94d; text-decoration: underline;">Contacto</a></p>
+    <p>Síguenos en:
+      <a href="#" style="color: #ffa94d; margin: 0 5px;">Instagram</a> |
+      <a href="#" style="color: #ffa94d; margin: 0 5px;">Twitter</a>
+    </p>
+  </footer>
+
   <script>
     window.addEventListener("message", (event) => {
       if (!event.data || !event.data.theme) return;
-
       const header = document.getElementById("pageHeader");
-
       if (event.data.theme === "dark") {
         header.style.backgroundColor = "#a259ff";
       } else if (event.data.theme === "light") {
         header.style.backgroundColor = "#ffa94d";
       }
     });
+
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        scrollTopBtn.style.display = "block";
+      } else {
+        scrollTopBtn.style.display = "none";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   </script>
 </body>
 </html>
