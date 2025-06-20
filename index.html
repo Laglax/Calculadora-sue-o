@@ -2,19 +2,21 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="google-site-verification" content="jtgc2KkfjrN-8jrNUaHapJ4ncKNmseEGbsPWiZfqdIY" />
   <title>REMinder</title>
-  <link rel="icon" type="image/png" href="favicon.png.png">
+  <link rel="icon" type="image/png" href="favicon.png.png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
+  overflow-x: hidden;
+}
+
+   body {
       margin: 0;
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to bottom right, #ffffff, #e8e8e8);
       color: #333;
       transition: background 0.3s ease;
     }
-
     header {
       padding: 2rem;
       text-align: center;
@@ -22,18 +24,15 @@
       background-color: #ffa94d;
       transition: background-color 0.5s ease;
     }
-
     h1 {
       margin: 0;
       font-size: 3rem;
       font-weight: 700;
     }
-
     main {
       padding: 2rem;
       text-align: center;
     }
-
     iframe {
       width: 100%;
       height: 800px;
@@ -41,32 +40,217 @@
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
+    #scrollTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ffa94d;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-size: 20px;
+  display: none;
+  z-index: 1000;
+}
 
     footer {
-      background: #333;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      border-top: 4px solid #ffa94d;
-    }
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  border-top: 4px solid #ffa94d;
+  transition: background-color 0.5s ease, border-top-color 0.5s ease, color 0.5s ease;
+  font-family: 'Inter', sans-serif;
 
-    #scrollTopBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #ffa94d;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      font-size: 20px;
+  /* 👇 Añadido para que ocupe bien el ancho y no quede cortado */
+  width: 100%;
+  clear: both;
+  display: block;
+  position: relative;
+  z-index: 10;
+}
+
+    footer a {
+      color: #ffa94d;
+      text-decoration: underline;
+      transition: color 0.5s ease;
+    }
+    footer a:hover {
+      color: #e68a00;
+    }
+    /* Estrellas */
+    .star-rating {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 20px 0 10px;
+    }
+    .star-rating input {
       display: none;
-      z-index: 1000;
+    }
+    .star-rating label {
+      font-size: 36px;
+      color: #ccc;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      transition: color 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+      box-sizing: border-box;
+    }
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+      color: #00b67a;
+      border-color: #00b67a;
+    }
+    .star-rating input:checked + label {
+      color: #00b67a;
+      border-color: #00b67a;
+      cursor: default;
+    }
+    .star-rating input:checked + label ~ label {
+      color: #ccc;
+      border-color: transparent;
+    }
+    #rating-msg {
+      text-align: center;
+      color: #00b67a;
+      font-weight: 600;
+      min-height: 24px;
+    }
+    #opinions-count {
+      text-align: center;
+      font-size: 1rem;
+      color: #00b67a;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
     }
 
+
+    /* Carrusel reseñas falsas */
+    .review-slider {
+      max-width: 800px;
+      margin: 30px auto;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #f9f9f9;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      padding: 15px;
+      font-family: 'Inter', sans-serif;
+    }
+    .review-track {
+      display: flex;
+      gap: 10px;
+      animation: scrollReviews 40s linear infinite;
+    }
+    .review {
+      flex: 0 0 250px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      text-align: left;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .review:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.review img {
+  border: 2px solid #ffa94d;
+}
+
+.review::after {
+  content: "★★★★★";
+  color: #facc15;
+  font-size: 1.1rem;
+  margin-top: 8px;
+  display: block;
+}
+
+    .review img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    @keyframes scrollReviews {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+
+    /* FAQ estilos (idénticos a los originales) */
+    #faq {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      font-family: 'Inter', sans-serif;
+    }
+    #faq h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    #faq details {
+      margin: 15px 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      background: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #faq details[open] {
+      background: #e6f7f1;
+      border-color: #00b67a;
+    }
+    #faq summary {
+      cursor: pointer;
+      font-weight: bold;
+      outline: none;
+      user-select: none;
+    }
+    #faq p {
+      margin-top: 10px;
+      line-height: 1.5;
+      color: #444;
+    }
+.review-slider {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.review-track {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  min-width: 100%;
+}
+
+
+
+    /* Dark mode */
     @media (prefers-color-scheme: dark) {
       body {
         background: #222;
@@ -75,127 +259,312 @@
       header {
         background-color: #a259ff;
       }
-      section#faq {
+      #faq {
         background: #333;
         color: #eee;
       }
+      #faq details {
+        background: #444;
+        border-color: #666;
+      }
+      #faq details[open] {
+        background: #5a3de4;
+        border-color: #a0f0c4;
+      }
+      #faq p {
+        color: #ddd;
+      }
+      footer {
+        background: #111;
+        color: #ddd;
+        border-top-color: #a259ff;
+      }
+      footer a {
+        color: #a259ff;
+      }
+      #scrollTopBtn {
+        background-color: #a259ff;
+        color: white;
+      }
+
     }
+    
   </style>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿Por qué es importante calcular las horas de sueño?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Calcular las horas de sueño es fundamental para garantizar un descanso de calidad..."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cuántas horas debo dormir según mi edad?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La cantidad de horas de sueño recomendada varía según la edad..."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué es un ciclo de sueño y cómo afecta a mi descanso?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Un ciclo de sueño completo dura aproximadamente 90 minutos..."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Por qué me despierto cansado incluso después de dormir 8 horas?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sentirte cansado después de dormir 8 horas puede deberse a varios factores..."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cómo mejorar mi higiene del sueño para dormir mejor?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Mejorar la higiene del sueño implica adoptar hábitos saludables..."
-          }
-        }
-      ]
-    }
-  </script>
+  <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XE4T5QT3G0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XE4T5QT3G0');
+</script>
+<!-- End Google Analytics -->
+
 </head>
 <body>
   <header id="pageHeader">
     <h1>REMinder💤</h1>
   </header>
 
+
   <main>
     <iframe id="calcFrame" src="main.html" title="Calculadora de Sueño"></iframe>
   </main>
 
-  <section id="faq" style="max-width: 800px; margin: 50px auto; padding: 20px; background: #f9f9f9; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.1); font-family: 'Inter', sans-serif;">
-    <h2 style="text-align: center; color: #333;">Preguntas Frecuentes</h2>
-    <details style="margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #fff;">
-      <summary style="cursor: pointer; font-weight: bold;">¿Por qué es importante calcular las horas de sueño?</summary>
-      <p style="margin-top: 10px;">Calcular las horas de sueño es fundamental para garantizar un descanso de calidad que permita al cuerpo y la mente recuperarse adecuadamente...</p>
+
+  <section id="faq">
+    <h2 data-lang-key="faq-title">Preguntas Frecuentes</h2>
+    <details>
+      <summary data-lang-key="faq-q1">¿Por qué es importante calcular las horas de sueño?</summary>
+      <p data-lang-key="faq-a1">
+        Calcular las horas de sueño te permite identificar si estás durmiendo lo suficiente para tu bienestar general. El sueño adecuado mejora la memoria, fortalece el sistema inmunológico, regula el estado de ánimo y optimiza la concentración. Además, ayuda a prevenir enfermedades crónicas y a mantener un equilibrio hormonal saludable. Saber cuánto duermes te ayuda a tomar decisiones conscientes para mejorar tu calidad de vida.
+      </p>
     </details>
-    <details style="margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #fff;">
-      <summary style="cursor: pointer; font-weight: bold;">¿Cuántas horas debo dormir según mi edad?</summary>
-      <p style="margin-top: 10px;">La cantidad de horas de sueño recomendada varía según la edad...</p>
+    <details>
+      <summary data-lang-key="faq-q2">¿Cuántas horas debo dormir según mi edad?</summary>
+      <p data-lang-key="faq-a2">
+        Las necesidades de sueño varían según la edad: los recién nacidos requieren entre 14 y 17 horas diarias, los niños pequeños entre 9 y 12 horas, y los adolescentes alrededor de 8 a 10 horas. Los adultos generalmente necesitan entre 7 y 9 horas, mientras que las personas mayores suelen requerir un poco menos, aunque la calidad del sueño puede disminuir con la edad. Dormir la cantidad adecuada es esencial para el desarrollo físico, mental y emocional.
+      </p>
     </details>
-    <details style="margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #fff;">
-      <summary style="cursor: pointer; font-weight: bold;">¿Qué es un ciclo de sueño y cómo afecta a mi descanso?</summary>
-      <p style="margin-top: 10px;">Un ciclo de sueño completo dura aproximadamente 90 minutos...</p>
+    <details>
+      <summary data-lang-key="faq-q3">¿Qué es un ciclo de sueño y cómo afecta a mi descanso?</summary>
+      <p data-lang-key="faq-a3">
+        Un ciclo de sueño dura aproximadamente 90 minutos y se compone de varias fases: sueño ligero, sueño profundo y sueño REM (movimiento ocular rápido). Cada fase cumple funciones específicas, como la consolidación de la memoria y la restauración física. Despertar durante un ciclo puede provocar sensación de fatiga o aturdimiento, mientras que despertar al final de un ciclo suele hacer que te sientas más descansado y alerta. Entender estos ciclos ayuda a programar mejor tus horas de sueño.
+      </p>
     </details>
-    <details style="margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #fff;">
-      <summary style="cursor: pointer; font-weight: bold;">¿Por qué me despierto cansado incluso después de dormir 8 horas?</summary>
-      <p style="margin-top: 10px;">Sentirte cansado después de dormir 8 horas puede deberse a varios factores...</p>
+    <details>
+      <summary data-lang-key="faq-q4">¿Por qué me despierto cansado incluso después de dormir 8 horas?</summary>
+      <p data-lang-key="faq-a4">
+        Dormir 8 horas no garantiza que el sueño sea reparador si hay interrupciones frecuentes, estrés, apnea del sueño u otros trastornos. Factores como la calidad del colchón, el ruido ambiental o la exposición a la luz también influyen. Además, si no respetas los ciclos naturales de sueño o tienes un ritmo irregular, es común despertarse cansado. Para mejorar esto, es importante mantener una rutina constante, un ambiente adecuado y, si es necesario, consultar con un especialista.
+      </p>
     </details>
-    <details style="margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #fff;">
-      <summary style="cursor: pointer; font-weight: bold;">¿Cómo mejorar mi higiene del sueño para dormir mejor?</summary>
-      <p style="margin-top: 10px;">Mejorar la higiene del sueño implica adoptar hábitos saludables...</p>
+    <details>
+      <summary data-lang-key="faq-q5">¿Cómo mejorar mi higiene del sueño para dormir mejor?</summary>
+      <p data-lang-key="faq-a5">
+        Mejorar la higiene del sueño implica adoptar hábitos saludables como mantener horarios regulares para acostarte y levantarte, evitar el uso de dispositivos electrónicos antes de dormir, y crear un ambiente oscuro, tranquilo y fresco. También es recomendable limitar el consumo de cafeína y alcohol, practicar técnicas de relajación, y realizar ejercicio físico regularmente, pero no justo antes de acostarte. Estos hábitos favorecen la calidad del sueño y ayudan a establecer un patrón reparador.
+      </p>
     </details>
   </section>
 
-  <button id="scrollTopBtn" onclick="scrollToTop()">↑</button>
 
-  <footer>
-    <p>&copy; 2025 REMinder. Todos los derechos reservados. | <a href="privacy.html" style="color: #ffa94d; text-decoration: underline;">Política de Privacidad</a> | <a href="#" style="color: #ffa94d; text-decoration: underline;">Contacto</a></p>
+<div class="review-slider">
+  <div class="review-track">
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/21.jpg" alt="Lucía"><div><strong>Lucía</strong><br>Me ayudó a dormir mejor desde el primer día. ¡Muy útil!</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos"><div><strong>Carlos</strong><br>Fácil de usar y muy intuitiva. Recomendada.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/12.jpg" alt="María"><div><strong>María</strong><br>Me sorprendió lo precisa que es con los ciclos REM.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Andrés"><div><strong>Andrés</strong><br>Una herramienta increíble. La uso todos los días.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/34.jpg" alt="Paula"><div><strong>Paula</strong><br>Muy útil para organizar mis horas de sueño.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/18.jpg" alt="Sergio"><div><strong>Sergio</strong><br>¡Funciona de verdad! He mejorado mi descanso.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/48.jpg" alt="Ana"><div><strong>Ana</strong><br>Visualmente atractiva y con buenas funciones.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Raúl"><div><strong>Raúl</strong><br>Gran experiencia. Recomendado para todos.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/8.jpg" alt="Clara"><div><strong>Clara</strong><br>No sabía que el sueño REM era tan importante. Gracias!</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/26.jpg" alt="David"><div><strong>David</strong><br>Desde que la uso, me levanto con más energía.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/15.jpg" alt="Sara"><div><strong>Sara</strong><br>Muy práctica y fácil de usar.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/38.jpg" alt="Jorge"><div><strong>Jorge</strong><br>La recomiendo a mis amigos siempre.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/9.jpg" alt="Elena"><div><strong>Elena</strong><br>Ha mejorado mi rutina nocturna mucho.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/29.jpg" alt="Tomás"><div><strong>Tomás</strong><br>La interfaz es muy amigable. Bien hecho.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/17.jpg" alt="Noelia"><div><strong>Noelia</strong><br>¡Una app que realmente cumple su función!</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/20.jpg" alt="Alberto"><div><strong>Alberto</strong><br>Me acuesto a la hora recomendada y duermo mejor.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Marta"><div><strong>Marta</strong><br>Genial para quienes les cuesta madrugar.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/6.jpg" alt="Iván"><div><strong>Iván</strong><br>Funcional, rápida y efectiva.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/42.jpg" alt="Alicia"><div><strong>Alicia</strong><br>Me encanta el diseño minimalista.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/16.jpg" alt="Fernando"><div><strong>Fernando</strong><br>Top para controlar mejor tus ciclos de sueño.</div></div>
+  
+      <!-- Duplicamos para loop suave -->
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/21.jpg" alt="Lucía"><div><strong>Lucía</strong><br>Me ayudó a dormir mejor desde el primer día. ¡Muy útil!</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos"><div><strong>Carlos</strong><br>Fácil de usar y muy intuitiva. Recomendada.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/12.jpg" alt="María"><div><strong>María</strong><br>Me sorprendió lo precisa que es con los ciclos REM.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Andrés"><div><strong>Andrés</strong><br>Una herramienta increíble. La uso todos los días.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/34.jpg" alt="Paula"><div><strong>Paula</strong><br>Muy útil para organizar mis horas de sueño.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/18.jpg" alt="Sergio"><div><strong>Sergio</strong><br>¡Funciona de verdad! He mejorado mi descanso.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/48.jpg" alt="Ana"><div><strong>Ana</strong><br>Visualmente atractiva y con buenas funciones.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Raúl"><div><strong>Raúl</strong><br>Gran experiencia. Recomendado para todos.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/8.jpg" alt="Clara"><div><strong>Clara</strong><br>No sabía que el sueño REM era tan importante. Gracias!</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/26.jpg" alt="David"><div><strong>David</strong><br>Desde que la uso, me levanto con más energía.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/15.jpg" alt="Sara"><div><strong>Sara</strong><br>Muy práctica y fácil de usar.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/38.jpg" alt="Jorge"><div><strong>Jorge</strong><br>La recomiendo a mis amigos siempre.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/9.jpg" alt="Elena"><div><strong>Elena</strong><br>Ha mejorado mi rutina nocturna mucho.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/29.jpg" alt="Tomás"><div><strong>Tomás</strong><br>La interfaz es muy amigable. Bien hecho.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/17.jpg" alt="Noelia"><div><strong>Noelia</strong><br>¡Una app que realmente cumple su función!</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/20.jpg" alt="Alberto"><div><strong>Alberto</strong><br>Me acuesto a la hora recomendada y duermo mejor.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Marta"><div><strong>Marta</strong><br>Genial para quienes les cuesta madrugar.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/6.jpg" alt="Iván"><div><strong>Iván</strong><br>Funcional, rápida y efectiva.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/women/42.jpg" alt="Alicia"><div><strong>Alicia</strong><br>Me encanta el diseño minimalista.</div></div>
+    <div class="review"><img src="https://randomuser.me/api/portraits/men/16.jpg" alt="Fernando"><div><strong>Fernando</strong><br>Top para controlar mejor tus ciclos de sueño.</div></div>
+  </div>
+</div>
+
+
+<div id="opinions-count">(6974 opiniones)</div>
+
+<div class="star-rating" aria-label="Califica la aplicación" style="display: flex; flex-direction: row-reverse;">
+  <input type="radio" id="1-star" name="rating" value="5" />
+  <label for="1-star" aria-label="1 estrella">★</label>
+  <input type="radio" id="2-stars" name="rating" value="4" />
+  <label for="2-stars" aria-label="2 estrellas">★</label>
+  <input type="radio" id="3-stars" name="rating" value="3" />
+  <label for="3-stars" aria-label="3 estrellas">★</label>
+  <input type="radio" id="4-stars" name="rating" value="2" />
+  <label for="4-stars" aria-label="4 estrellas">★</label>
+  <input type="radio" id="5-stars" name="rating" value="1" />
+  <label for="5-stars" aria-label="5 estrellas">★</label>
+</div>
+
+<div id="rating-msg" role="alert" aria-live="polite"></div>
+
+
+<button id="scrollTopBtn" onclick="scrollToTop()">↑</button>
+
+  <script>
+    const ratingRadios = document.querySelectorAll('.star-rating input');
+    const ratingMsg = document.getElementById('rating-msg');
+    const opinionsCountElem = document.getElementById('opinions-count');
+    let opinionsCount = 6974;
+    let rated = false;
+
+
+    ratingRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (rated) return; // Bloquear cambios tras la primera opinión
+        rated = true;
+        ratingMsg.textContent = `Gracias por valorar con ${radio.value} estrella${radio.value > 1 ? 's' : ''}!`;
+        opinionsCount++;
+        opinionsCountElem.textContent = `(${opinionsCount} opiniones)`;
+        // Desactivar todos inputs para bloquear más cambios
+        ratingRadios.forEach(r => r.disabled = true);
+      });
+    });
+
+
+    // Botón volver arriba
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollTopBtn.style.display = 'block';
+      } else {
+        scrollTopBtn.style.display = 'none';
+      }
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+
+
+    // Traducción FAQ y footer dinámico según idioma (del iframe)
+    const translations = {
+      es: {
+        'faq-title': 'Preguntas Frecuentes',
+        'faq-q1': '¿Por qué es importante calcular las horas de sueño?',
+        'faq-a1': 'Calcular las horas de sueño te permite identificar si estás durmiendo lo suficiente para tu bienestar general. El sueño adecuado mejora la memoria, fortalece el sistema inmunológico, regula el estado de ánimo y optimiza la concentración. Además, ayuda a prevenir enfermedades crónicas y a mantener un equilibrio hormonal saludable. Saber cuánto duermes te ayuda a tomar decisiones conscientes para mejorar tu calidad de vida.',
+        'faq-q2': '¿Cuántas horas debo dormir según mi edad?',
+        'faq-a2': 'Las necesidades de sueño varían según la edad: los recién nacidos requieren entre 14 y 17 horas diarias, los niños pequeños entre 9 y 12 horas, y los adolescentes alrededor de 8 a 10 horas. Los adultos generalmente necesitan entre 7 y 9 horas, mientras que las personas mayores suelen requerir un poco menos, aunque la calidad del sueño puede disminuir con la edad. Dormir la cantidad adecuada es esencial para el desarrollo físico, mental y emocional.',
+        'faq-q3': '¿Qué es un ciclo de sueño y cómo afecta a mi descanso?',
+        'faq-a3': 'Un ciclo de sueño dura aproximadamente 90 minutos y se compone de varias fases: sueño ligero, sueño profundo y sueño REM (movimiento ocular rápido). Cada fase cumple funciones específicas, como la consolidación de la memoria y la restauración física. Despertar durante un ciclo puede provocar sensación de fatiga o aturdimiento, mientras que despertar al final de un ciclo suele hacer que te sientas más descansado y alerta. Entender estos ciclos ayuda a programar mejor tus horas de sueño.',
+        'faq-q4': '¿Por qué me despierto cansado incluso después de dormir 8 horas?',
+        'faq-a4': 'Dormir 8 horas no garantiza que el sueño sea reparador si hay interrupciones frecuentes, estrés, apnea del sueño u otros trastornos. Factores como la calidad del colchón, el ruido ambiental o la exposición a la luz también influyen. Además, si no respetas los ciclos naturales de sueño o tienes un ritmo irregular, es común despertarse cansado. Para mejorar esto, es importante mantener una rutina constante, un ambiente adecuado y, si es necesario, consultar con un especialista.',
+        'faq-q5': '¿Cómo mejorar mi higiene del sueño para dormir mejor?',
+        'faq-a5': 'Mejorar la higiene del sueño implica adoptar hábitos saludables como mantener horarios regulares para acostarte y levantarte, evitar el uso de dispositivos electrónicos antes de dormir, y crear un ambiente oscuro, tranquilo y fresco. También es recomendable limitar el consumo de cafeína y alcohol, practicar técnicas de relajación, y realizar ejercicio físico regularmente, pero no justo antes de acostarte. Estos hábitos favorecen la calidad del sueño y ayudan a establecer un patrón reparador.',
+        'footer-privacy': 'Política de Privacidad'
+      },
+      en: {
+        'faq-title': 'Frequently Asked Questions',
+        'faq-q1': 'Why is it important to calculate sleep hours?',
+        'faq-a1': 'Calculating your sleep hours helps you identify if you are getting enough rest for your overall well-being. Proper sleep improves memory, strengthens the immune system, regulates mood, and optimizes concentration. It also helps prevent chronic diseases and maintains hormonal balance. Knowing how much you sleep helps you make conscious decisions to improve your quality of life.',
+        'faq-q2': 'How many hours should I sleep according to my age?',
+        'faq-a2': 'Sleep needs vary by age: newborns require between 14 to 17 hours daily, toddlers 9 to 12 hours, and teenagers around 8 to 10 hours. Adults generally need 7 to 9 hours, while older adults may require slightly less, though sleep quality may decrease with age. Getting the right amount of sleep is essential for physical, mental, and emotional development.',
+        'faq-q3': 'What is a sleep cycle and how does it affect my rest?',
+        'faq-a3': 'A sleep cycle lasts approximately 90 minutes and consists of several phases: light sleep, deep sleep, and REM (rapid eye movement) sleep. Each phase serves specific functions, such as memory consolidation and physical restoration. Waking up during a cycle can cause grogginess or fatigue, while waking at the end of a cycle usually makes you feel more rested and alert. Understanding these cycles helps you better schedule your sleep hours.',
+        'faq-q4': 'Why do I wake up tired even after sleeping 8 hours?',
+        'faq-a4': 'Sleeping 8 hours does not guarantee restorative sleep if there are frequent interruptions, stress, sleep apnea, or other disorders. Factors like mattress quality, environmental noise, or light exposure also affect rest. Additionally, if you don’t respect natural sleep cycles or have an irregular rhythm, feeling tired upon waking is common. Improving this involves maintaining a consistent routine, a proper environment, and consulting a specialist if needed.',
+        'faq-q5': 'How can I improve my sleep hygiene to sleep better?',
+        'faq-a5': 'Improving sleep hygiene involves adopting healthy habits such as keeping regular bedtimes and wake-up times, avoiding electronic devices before sleeping, and creating a dark, quiet, and cool environment. It is also recommended to limit caffeine and alcohol intake, practice relaxation techniques, and exercise regularly but not right before bedtime. These habits promote sleep quality and help establish a restorative pattern.',
+        'footer-privacy': 'Privacy Policy'
+      },
+      fr: {
+        'faq-title': 'Questions Fréquemment Posées',
+        'faq-q1': 'Pourquoi est-il important de calculer les heures de sommeil ?',
+        'faq-a1': 'Calculer vos heures de sommeil vous permet de savoir si vous dormez suffisamment pour votre bien-être général. Un sommeil adéquat améliore la mémoire, renforce le système immunitaire, régule l\'humeur et optimise la concentration. Il aide également à prévenir les maladies chroniques et à maintenir un équilibre hormonal sain. Savoir combien vous dormez vous aide à prendre des décisions conscientes pour améliorer votre qualité de vie.',
+        'faq-q2': 'Combien d\'heures dois-je dormir selon mon âge ?',
+        'faq-a2': 'Les besoins en sommeil varient selon l\'âge : les nouveau-nés nécessitent entre 14 et 17 heures par jour, les tout-petits entre 9 et 12 heures, et les adolescents environ 8 à 10 heures. Les adultes ont généralement besoin de 7 à 9 heures, tandis que les personnes âgées en nécessitent un peu moins, bien que la qualité du sommeil puisse diminuer avec l\'âge. Dormir la bonne quantité est essentiel pour le développement physique, mental et émotionnel.',
+        'faq-q3': 'Qu\'est-ce qu\'un cycle de sommeil et comment affecte-t-il mon repos ?',
+        'faq-a3': 'Un cycle de sommeil dure environ 90 minutes et comprend plusieurs phases : sommeil léger, sommeil profond et sommeil paradoxal (REM). Chaque phase remplit des fonctions spécifiques, comme la consolidation de la mémoire et la restauration physique. Se réveiller pendant un cycle peut provoquer de la fatigue, tandis que se réveiller à la fin d\'un cycle vous fait généralement sentir plus reposé et alerte. Comprendre ces cycles aide à mieux planifier vos heures de sommeil.',
+        'faq-q4': 'Pourquoi me réveille-je fatigué même après 8 heures de sommeil ?',
+        'faq-a4': 'Dormir 8 heures ne garantit pas un sommeil réparateur s\'il y a des interruptions fréquentes, du stress, de l\'apnée du sommeil ou d\'autres troubles. Des facteurs comme la qualité du matelas, le bruit ambiant ou l\'exposition à la lumière influent également. De plus, ne pas respecter les cycles naturels de sommeil ou avoir un rythme irrégulier peut provoquer de la fatigue au réveil. Pour améliorer cela, il est important de maintenir une routine constante, un environnement adéquat et de consulter un spécialiste si nécessaire.',
+        'faq-q5': 'Comment améliorer mon hygiène de sommeil pour mieux dormir ?',
+        'faq-a5': 'Améliorer l\'hygiène du sommeil implique d\'adopter des habitudes saines telles que maintenir des horaires réguliers pour se coucher et se lever, éviter les appareils électroniques avant de dormir et créer un environnement sombre, calme et frais. Il est également recommandé de limiter la consommation de caféine et d\'alcool, de pratiquer des techniques de relaxation et de faire de l\'exercice régulièrement, mais pas juste avant de se coucher. Ces habitudes favorisent la qualité du sommeil et aident à établir un rythme réparateur.',
+        'footer-privacy': 'Politique de Confidentialité'
+      }
+    };
+
+
+    function updateLanguage(lang = 'es') {
+      document.querySelectorAll('[data-lang-key]').forEach(el => {
+        const key = el.getAttribute('data-lang-key');
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+    }
+
+
+    // Escuchar mensajes del iframe para el idioma
+    window.addEventListener('message', (event) => {
+      if (event.origin !== window.location.origin) return; // seguridad
+      if (event.data.lang) {
+        updateLanguage(event.data.lang);
+      }
+    });
+
+
+    // Inicializamos en español
+    updateLanguage('es');
+  </script>
+  <!-- Pega esto justo antes del </body> de tu index -->
+<footer id="pageFooter">
+    <p>&copy; 2025 REMinder. Todos los derechos reservados. | 
+      <a href="privacy.html" style="color: #ffa94d; text-decoration: underline;">Política de Privacidad</a> | 
+<a href="mailto:versement2@gmail.com" style="color: #ffa94d; text-decoration: underline;">Contacto</a>
+    </p>
     <p>Síguenos en:
       <a href="#" style="color: #ffa94d; margin: 0 5px;">Instagram</a> |
       <a href="#" style="color: #ffa94d; margin: 0 5px;">Twitter</a>
     </p>
   </footer>
+<script>
+  // Tema: actualiza header, footer y botón scroll según el tema recibido
+  window.addEventListener("message", (event) => {
+    if (!event.data || !event.data.theme) return;
 
-  <script>
-    window.addEventListener("message", (event) => {
-      if (!event.data || !event.data.theme) return;
-      const header = document.getElementById("pageHeader");
-      if (event.data.theme === "dark") {
-        header.style.backgroundColor = "#a259ff";
-      } else if (event.data.theme === "light") {
-        header.style.backgroundColor = "#ffa94d";
+    const header = document.getElementById("pageHeader");
+    const footer = document.getElementById("pageFooter");
+    const scrollBtn = document.getElementById("scrollTopBtn");
+
+    if (event.data.theme === "dark") {
+      if (header) header.style.backgroundColor = "#a259ff";
+      if (footer) {
+        footer.style.backgroundColor = "#222";
+        footer.style.color = "#eee";
+        footer.style.borderTop = "4px solid #a259ff"; // ← AÑADIDO
+        footer.querySelectorAll("a").forEach(a => a.style.color = "#a259ff");
       }
-    });
-
-    const scrollTopBtn = document.getElementById("scrollTopBtn");
-    window.onscroll = function() {
-      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        scrollTopBtn.style.display = "block";
-      } else {
-        scrollTopBtn.style.display = "none";
+      if (scrollBtn) {
+        scrollBtn.style.backgroundColor = "#a259ff";
+        scrollBtn.style.color = "#fff";
       }
-    };
-
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (event.data.theme === "light") {
+      if (header) header.style.backgroundColor = "#ffa94d";
+      if (footer) {
+        footer.style.backgroundColor = "#333";
+        footer.style.color = "#fff";
+        footer.style.borderTop = "4px solid #ffa94d"; // ← AÑADIDO
+        footer.querySelectorAll("a").forEach(a => a.style.color = "#ffa94d");
+      }
+      if (scrollBtn) {
+        scrollBtn.style.backgroundColor = "#ffa94d";
+        scrollBtn.style.color = "#fff";
+      }
     }
-  </script>
+  });
+</script>
 </body>
 </html>
