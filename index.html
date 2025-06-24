@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>REMinder</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4610086890674753"
+     crossorigin="anonymous"></script>
   <link rel="icon" type="image/png" href="favicon.png.png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -290,6 +292,112 @@
     }
     
   </style>
+<style>
+.step-section {
+  padding: 60px 20px;
+  background: #111;
+  color: #fff;
+  text-align: center;
+}
+.step-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  text-transform: uppercase;
+  color: #00e0ff;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 80px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease;
+  flex-wrap: wrap;
+}
+.step img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+.step-text {
+  max-width: 500px;
+  text-align: left;
+}
+.step-text h3 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #00c6ff;
+}
+.step-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.step.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.alternate-left {
+  flex-direction: row;
+}
+.alternate-right {
+  flex-direction: row-reverse;
+}
+@media (max-width: 768px) {
+  .step {
+    flex-direction: column !important;
+    text-align: center;
+  }
+  .step-text {
+    text-align: center;
+  }
+}
+</style>
+<style>
+  .info-section {
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 40px;
+    background: #1f1f1f;
+    color: #f2f2f2;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1s ease;
+  }
+
+  .info-section.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .info-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #ffa726;
+  }
+
+  .info-section ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .info-section li {
+    margin: 10px 0;
+    line-height: 1.6;
+  }
+
+  .info-section p {
+    line-height: 1.8;
+    font-size: 1.1em;
+    margin: 20px 0;
+  }
+</style>
+
   <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XE4T5QT3G0"></script>
 <script>
@@ -299,7 +407,6 @@
   gtag('config', 'G-XE4T5QT3G0');
 </script>
 <!-- End Google Analytics -->
-
 </head>
 <body>
   <header id="pageHeader">
@@ -310,6 +417,93 @@
   <main>
     <iframe id="calcFrame" src="main.html" title="Calculadora de Sueño"></iframe>
   </main>
+
+<section id="instrucciones" class="step-section">
+  <h2>🧠 CÓMO USAR LA CALCULADORA</h2>
+
+  <div class="step alternate-left">
+    <div class="step-text">
+      <h3>PASO 1: Elige tu objetivo</h3>
+      <p>Decide si quieres calcular la mejor hora para <strong>dormirte</strong> o para <strong>despertarte</strong>. Esto es clave para adaptar la fórmula de los ciclos REM.</p>
+    </div>
+    <img src="paso1.png" alt="Paso 1" loading="lazy">
+  </div>
+
+  <div class="step alternate-right">
+    <img src="paso 2.png" alt="Paso 2" loading="lazy">
+    <div class="step-text">
+      <h3>PASO 2: Introduce tu hora deseada</h3>
+      <p>Escribe a qué hora deseas <strong>dormirte</strong> o <strong>despertarte</strong>. La calculadora utilizará esta información para determinar los ciclos de sueño más naturales.</p>
+    </div>
+  </div>
+
+  <div class="step alternate-left">
+    <div class="step-text">
+      <h3>PASO 3: Tiempo que tardas en dormirte</h3>
+      <p>Indica aproximadamente cuántos minutos tardas en quedarte dormido. Esto ajusta el cálculo para mayor precisión.</p>
+    </div>
+    <img src="paso3.png" alt="Paso 3" loading="lazy">
+  </div>
+
+  <div class="step alternate-right">
+    <img src="paso4.png" alt="Paso 4" loading="lazy">
+    <div class="step-text">
+      <h3>PASO 4: ¿Quieres optimizar tu sueño?</h3>
+      <p>Activa la opción de <strong>optimización</strong> si buscas mejorar el rendimiento físico o mental. La herramienta adaptará los ciclos para evitar interrupciones en sueño profundo.</p>
+    </div>
+  </div>
+
+  <div class="step alternate-left">
+    <div class="step-text">
+      <h3>PASO 5: Pulsa calcular</h3>
+      <p>Haz clic en <strong>Calcular</strong> y verás tus mejores opciones para acostarte o despertarte sin interrumpir tu sueño REM.</p>
+    </div>
+    <img src="paso5.png" alt="Paso 5" loading="lazy">
+  </div>
+</section>
+
+<section class="info-section reveal">
+  <h2>🌙 Consejos practicos para dormir mejor</h2>
+  <p>Un sueño reparador no solo mejora tu humor y rendimiento diario, sino que también fortalece tu salud física y mental. Si tienes problemas para dormir o simplemente quieres mejorar tu descanso, aquí tienes algunos consejos prácticos respaldados por la ciencia del sueño. 🧠💤</p>
+  <ul>
+    <li>🕰️ <strong>Establece un horario:</strong> Acuéstate y despiértate a la misma hora todos los días, incluso los fines de semana.</li>
+    <li>📵 <strong>Evita pantallas antes de dormir:</strong> La luz azul de móviles y ordenadores altera tu ritmo circadiano.</li>
+    <li>🌡️ <strong>Cuida el ambiente:</strong> Mantén la habitación oscura, silenciosa y a una temperatura fresca (~18 °C).</li>
+    <li>🧘‍♂️ <strong>Relájate antes de dormir:</strong> Prueba meditación, música suave o un baño caliente.</li>
+    <li>🍵 <strong>Evita estimulantes:</strong> No consumas cafeína, alcohol o comidas pesadas al menos 3 horas antes de acostarte.</li>
+  </ul>
+  <p>Además, el ejercicio regular, la exposición a la luz natural durante el día 🌞 y evitar siestas largas o muy tarde contribuyen a mejorar la calidad del sueño. Mantener una rutina nocturna coherente entrena a tu cuerpo para reconocer cuándo es momento de descansar.</p>
+  <p>😌 Dormir bien reduce el estrés, mejora tu sistema inmune y previene enfermedades cardiovasculares. ¡No subestimes el poder de una buena noche de sueño!</p>
+</section>
+
+<section class="info-section reveal">
+  <h2>💭 ¿Qué es el sueño REM?</h2>
+  <p>El sueño REM (Rapid Eye Movement) es una de las fases más fascinantes del ciclo del sueño. Se caracteriza por movimientos oculares rápidos, incremento de la actividad cerebral y relajación muscular profunda. Es durante esta etapa cuando ocurren la mayoría de los sueños vívidos 🌈🛌.</p>
+  <p>El sueño REM suele comenzar entre 60 y 90 minutos después de quedarte dormido y se vuelve más prolongado en cada ciclo sucesivo. Aunque representa solo un 20–25% del tiempo total de sueño, su importancia es crítica.</p>
+  <ul>
+    <li>🧠 <strong>Procesamiento emocional:</strong> Ayuda a regular emociones, ansiedad y estrés.</li>
+    <li>📝 <strong>Consolidación de la memoria:</strong> Es esencial para fijar conocimientos y experiencias.</li>
+    <li>🎨 <strong>Creatividad y resolución de problemas:</strong> Durante esta etapa, el cerebro establece conexiones nuevas e inesperadas.</li>
+    <li>🩺 <strong>Salud cerebral a largo plazo:</strong> Un sueño REM adecuado reduce el riesgo de enfermedades neurodegenerativas.</li>
+  </ul>
+  <p>La privación del sueño REM puede provocar irritabilidad, problemas de concentración, y afectar la salud cognitiva. Dormir lo suficiente para completar varios ciclos de sueño (incluyendo REM) cada noche es esencial para mantener el equilibrio mental y físico.</p>
+  <p>🌟 <strong>Dato clave:</strong> La mayoría de las personas necesitan al menos 90 minutos de sueño REM cada noche para obtener todos sus beneficios. ¡Cuídalo!</p>
+</section>
+
+
+<section class="info-section reveal">
+  <h2>🌀 ¿Como funciona el ciclo de sueño?</h2>
+  <p>El sueño humano se divide en ciclos de aproximadamente 90 minutos que se repiten varias veces durante la noche. Cada ciclo consta de diferentes fases que desempeñan funciones específicas esenciales para nuestra salud mental y física. Conocer cómo funciona este proceso puede ayudarte a optimizar tus horarios de descanso y mejorar tu calidad de vida.</p>
+  <p>Las fases del sueño se clasifican en dos tipos principales: el sueño No REM (NREM) y el sueño REM (Rapid Eye Movement). El ciclo comienza con el sueño ligero (fase 1 y 2), seguido del sueño profundo (fase 3), y finaliza con el sueño REM, que es donde se produce la mayoría de los sueños y se consolida la memoria.</p>
+  <ul>
+    <li>😴 <strong>Fase 1:</strong> Transición entre la vigilia y el sueño. Es breve y fácil de interrumpir.</li>
+    <li>😌 <strong>Fase 2:</strong> Sueño ligero. El ritmo cardíaco y la temperatura corporal descienden.</li>
+    <li>🌑 <strong>Fase 3:</strong> Sueño profundo. Es vital para la reparación muscular y el sistema inmunológico.</li>
+    <li>💭 <strong>Fase REM:</strong> Etapa de sueños intensos, consolidación de la memoria y creatividad.</li>
+  </ul>
+  <p>Completar varios ciclos de sueño por noche garantiza que pasemos suficiente tiempo en cada fase, lo cual es crucial para despertar renovados. Un adulto promedio necesita entre 4 y 6 ciclos completos cada noche, es decir, entre 6 y 9 horas de sueño.</p>
+  <p>💡 <strong>Dato curioso:</strong> Saltarse la fase REM o interrumpir el sueño profundo repetidamente puede generar fatiga, irritabilidad, pérdida de memoria y otros problemas de salud.</p>
+</section>
 
 
   <section id="faq">
@@ -523,6 +717,7 @@
 <footer id="pageFooter">
     <p>&copy; 2025 REMinder. Todos los derechos reservados. | 
       <a href="privacy.html" style="color: #ffa94d; text-decoration: underline;">Política de Privacidad</a> | 
+       <a href="politica-cookies.html" style="color:#ffa94d; text-decoration: underline;">Política de cookies</a> |
 <a href="mailto:versement2@gmail.com" style="color: #ffa94d; text-decoration: underline;">Contacto</a>
     </p>
     <p>Síguenos en:
@@ -566,5 +761,36 @@
     }
   });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const steps = document.querySelectorAll('.step');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.2
+  });
+
+  steps.forEach(step => observer.observe(step));
+});
+</script>
+<script>
+  // Mostrar secciones al hacer scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  });
+
+  document.querySelectorAll(".reveal").forEach(section => {
+    observer.observe(section);
+  });
+</script>
+
 </body>
 </html>
