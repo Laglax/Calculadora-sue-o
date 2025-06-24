@@ -128,7 +128,6 @@
     .language-select {
       margin-top: 2rem;
     }
-    
   </style>
 </head>
 <body class="light-mode">
@@ -180,20 +179,29 @@
       <label for="language"><span style="color: limegreen">●</span> LANGUAGES</label>
       <select id="language" onchange="changeLanguage()">
         <option value="en">English</option>
-        <option value="es">Español</option>
+        <option value="es"selected>Español</option>
         <option value="fr">Français</option>
       </select>
     </div>
   </div>
 
   <script>
-    // JS tal cual enviaste, sin cambios
     document.addEventListener('DOMContentLoaded', () => {
-      populateSelectors();
-      changeLanguage();
-      // Al cargar, enviar el tema claro por defecto
-      window.parent.postMessage({ theme: 'light' }, '*');
-    });
+  populateSelectors();
+
+  // Leer idioma de localStorage o usar 'es' si no hay nada
+  const savedLang = localStorage.getItem('language') || 'es';
+
+  // Establecer idioma en el selector
+  document.getElementById('language').value = savedLang;
+
+  // Aplicar idioma
+  changeLanguage();
+
+  // Tema por defecto
+  window.parent.postMessage({ theme: 'light' }, '*');
+});
+
 
     let mode = 'wake';
 
@@ -251,6 +259,7 @@
 
     function changeLanguage() {
       const lang = document.getElementById("language").value;
+      localStorage.setItem("language", lang);
       const t = translations[lang];
       document.getElementById("title").textContent = t.title;
       document.getElementById("wakeBtn").textContent = t.wake;
